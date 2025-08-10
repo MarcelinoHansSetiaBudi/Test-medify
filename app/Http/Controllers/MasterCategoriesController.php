@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MasterCategories;
+use App\Models\MasterItem;
 use Illuminate\Http\Request;
 use Log;
 
@@ -104,9 +105,11 @@ class MasterCategoriesController extends Controller
      */
     public function singleView($kode)
     {
-        $item = MasterCategories::where('kode', $kode)->first();
+        $data = MasterCategories::where('kode', $kode)->first();
+        $listItems = MasterItem::where('jenis', $data->nama)->get();
         return view('master_categories.single.index', [
-            'data' => $item
+            'data' => $data,
+            'item' => $listItems
         ]);
     }
 
