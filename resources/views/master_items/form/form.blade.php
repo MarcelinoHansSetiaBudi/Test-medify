@@ -36,7 +36,7 @@
     </div>
 
     @php $selected = $item->jenis ?? ''; @endphp
-    <div class="form-group">
+    {{-- <div class="form-group">
         <label>Jenis</label>
         <select class="form-control" required name="jenis">
             <option @if($selected == '') selected @endif value="">--Pilih--</option>
@@ -46,7 +46,17 @@
             <optio @if($selected == 'Umum') selected @endif>Umum</option>
             <optio @if($selected == 'ATK') selected @endif>ATK</option>
         </select>
+    </div> --}}
+    <div class="form-group">
+        <label>Jenis</label>
+        <select class="form-control" required name="jenis">
+            <option @if($selected == '') selected @endif value="">--Pilih--</option>
+            @foreach($categories as $category)
+                <option @if($selected == $category->nama) selected @endif value="{{ $category->nama }}">{{ $category->nama }}</option>
+            @endforeach
+        </select>
     </div>
+
 
     <button class="btn btn-primary mt-3">Submit</button>
 

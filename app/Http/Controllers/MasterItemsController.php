@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MasterCategories;
 use App\Models\MasterItem;
 use Illuminate\Http\Request;
 
@@ -38,11 +39,13 @@ class MasterItemsController extends Controller
     {
         if ($method == 'new') {
             $item = [];
+            $categories = MasterCategories::select('nama')->get();
         } else {
             $item = MasterItem::find($id);
         }
-        $data['item'] = $item;
-        $data['method'] = $method;
+        $data['item']       = $item;
+        $data['method']     = $method;
+        $data['categories'] = $categories;
         return view('master_items.form.index', $data);
     }
 
